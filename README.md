@@ -36,8 +36,8 @@ there won't be multiple instances of the same store. Typically this means
 exporting an individual store object and globally exposing it to all
 component's that `require` it.
 
-This is somewhat analogous to our database metaphora: You might store different
-"kinds" of data that you store in different databases (e.g. you might 
+This is somewhat analogous to our database metaphora: We might store different
+"kinds" of data that we store in different databases (e.g. we might 
 unstructured data in MongoDB and relational data in something like PostgreSQL),
 but all clients share the "same" database. Each application node has access to
 the same data.
@@ -310,16 +310,117 @@ will be called with the updated state object.
 The returned `removeListener` function de-registers the previously registered
 listener function.
 
-## `getState() #=> state`
+### `getState() #=> state`
 
 Used by components to get the initial state of the store. Returns the currently
 encapsulated state object.
 
-## `setState(state)`
+### `setState(state)`
 
 Explicitly stores the passed in state on the store instance. In the next lesson
 we're going to explore how to generalize data-flow in our application to allow
-actions to mutate stores via a kind of central event bus ("Dispatcher").
+actions to mutate stores via a kind of central event bus ("Dispatcher"). We're
+slowly moving towards an architecture in which stores are being updated using
+external action handlers rather than explicit function calls. But we aren't
+quite there yet!
+
+### Custom Getters
+
+So far our store only has a single method for extracting all the user records
+that have been stored in it.
+
+This can be a bit messy, since in our above example, the `<Profile />` component
+actually stores **all** received user object, even though it only ever renders
+a single one.
+
+In scenarios like that, it's quite common to add this "filtering" logic to the
+underlying store.
+
+Instead of finding the matching user object in the `<Profile />` component's
+render method, we can instead add a new method to the `UserStore` in order to
+enable us to use similar logic in other components that might also render users
+(such as a list of friends):
+
+```js
+class UserStore {
+  getUserById (id) {
+    return this.state.find(user => user.id === id);
+  }
+}
+```
+
+Our `<Profile />` component can now simply call this method in order to update
+its own state accordingly.
+
+```js
+class Profile extends React.Component {
+  componentDidMount () {
+    // ...
+    const user = userStore.getUserById(this.props.userId);
+    this.setState({ user });
+  }
+}
+```
+
+And our render method no longer has to iterate over all user records:
+
+class Profile extends React.Component {
+  render () {
+    const {user} = this.state;
+
+    if (!user) {
+      return <div>Loading...</div>;
+    }
+
+    return (
+      <dl>
+        <dt>First Name</dt>
+        <dd>{user.firstName}</dd>
+        <dt>Last Name</dt>
+        <dd>{user.lastName}</dd>
+        <dt>Bio</dt>
+        <dd>{user.bio}</dd>
+      </dl>
+    );
+  }
+}
+```
+
+This has a couple of advantages over copying over the "entire" `UserStore`
+state.
+
+1. Performance Improvement
+
+  Computers are pretty fast, so unless there is a huge number of users, the
+  performance difference won't be noticeable. Nevertheless, small improvements
+  add up, so not re-rendering the `<Profile />` component whenever **any** user
+  is definitely desirable.
+
+  Further more, we could implement a `shouldComponentUpdate` method on the
+  `<Profile />` component:
+
+  ```js
+  shouldComponentUpdate ({ user }) {
+    return user !== this.state.user;
+  }
+  ```
+
+  Which would ignore store updates that are unrelated to our actual user record.
+
+2. Better modularity
+
+  Potentially, there could be all kinds of components that render user object.
+  E.g. a chat sidebar could display each user using an individual component, a
+  friend component or modal could equally be wired up to the shared store.
+
+  Extracting out the logic for finding individual users based on id reduces code
+  redundancy in those cases.
+
+## Summary
+
+In this lesson we learned a lot about stores, how to connect them to component
+and how modularize our component architecture. In the next lesson we're going to
+learn how to update stores using our action handlers.
 
 ## Resources
 

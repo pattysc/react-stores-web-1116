@@ -330,7 +330,7 @@ So far our store only has a single method for extracting all the user records
 that have been stored in it.
 
 This can be a bit messy, since in our above example, the `<Profile />` component
-actually stores **all** received user object, even though it only ever renders
+actually stores **all** received user objects, even though it only ever renders
 a single one.
 
 In scenarios like that, it's quite common to add this "filtering" logic to the

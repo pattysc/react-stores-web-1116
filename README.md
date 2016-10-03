@@ -343,6 +343,7 @@ enable us to use similar logic in other components that might also render users
 
 ```js
 class UserStore {
+  // ...
   getUserById (id) {
     return this.state.find(user => user.id === id);
   }

@@ -364,6 +364,7 @@ class Profile extends React.Component {
 
 And our render method no longer has to iterate over all user records:
 
+```js
 class Profile extends React.Component {
   render () {
     const {user} = this.state;

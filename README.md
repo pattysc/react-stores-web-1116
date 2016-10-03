@@ -127,7 +127,7 @@ const userStore = require('../stores/userStore');
 
 class Profile extends React.Component {
   render () {
-    const {userId} = this.props;
+    const { userId } = this.props;
     const profile = userStore.find((user) => user.id === userId);
 
     if (!profile) {

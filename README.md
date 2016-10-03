@@ -214,7 +214,7 @@ class UserStore {
   // ...
   setState (state) {
     this.state = state;
-    for (let listener of this.listeners) {
+    for (const listener of this.listeners) {
       listener(state);
     }
   }

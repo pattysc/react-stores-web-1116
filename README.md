@@ -283,9 +283,9 @@ class Profile extends React.Component {
   componentDidMount () {
     // We store a reference to the added event listener.
     this.removeListener = userStore.addListener((state) => {
-      this.setState(state)
+      this.setState(state);
     });
-    this.setState(userStore.getState())
+    this.setState(userStore.getState());
   }
   componentWillUnmount () {
     // Destroy the listener when the component unmounts.

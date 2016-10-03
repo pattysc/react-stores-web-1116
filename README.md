@@ -215,7 +215,7 @@ class UserStore {
   setState (state) {
     this.state = state;
     for (let listener of this.listeners) {
-      listener.call(null, state);
+      listener(state);
     }
   }
 }
@@ -234,7 +234,7 @@ class Profile extends React.Component {
     this.setState(userStore.getState())
   }
   render () {
-    const {userId} = this.props;
+    const { userId } = this.props;
 
     // We're now accessing `this.state` instead of `userStore`.
     const profile = this.state.find((user) => user.id === userId);

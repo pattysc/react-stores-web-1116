@@ -50,7 +50,7 @@ Of course having a store that simply wraps our state object isn't too useful yet
 
 Hence we need a way to wire up our components to our global store. In some way, components need to be able to "listen" for state changes that occur in out store:
 
-![Flux Store](./assets/Flux - Store.png)
+![Flux Store](https://s3.amazonaws.com/learn-verified/react-stores-readme-flux-store.png)
 
 An arbitrary number of components can subscribe to state changes that occur in the store. Component's can then react to the  state change by updating their own state and thus triggering a re-render.
 

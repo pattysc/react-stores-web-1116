@@ -22,7 +22,7 @@ In Flux-terms, a store typically has a couple of methods that we're going to go 
 
 Singletons are application-level singletons. While there might be a variety of different stores (such as a `UserStore`, `FeedStore`, `MessageStore` etc.), there won't be multiple instances of the same store. Typically this means exporting an individual store object and globally exposing it to all component's that `require` it.
 
-This is somewhat analogous to our database metaphora: We might store different "kinds" of data that we store in different databases (e.g. we might unstructured data in MongoDB and relational data in something like PostgreSQL), but all clients share the "same" database. Each application node has access to the same data.
+This is somewhat analogous to our database metaphors: We might store different "kinds" of data that we store in different databases (e.g. we might store unstructured data in MongoDB and relational data in something like PostgreSQL), but all clients share the "same" database. Each application node has access to the same data.
 
 On the most fundamental level, a store encapsulates state. We can easily model this using a ES6 class:
 

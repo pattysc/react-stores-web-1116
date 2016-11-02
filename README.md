@@ -22,7 +22,7 @@ In Flux-terms, a store typically has a couple of methods that we're going to go 
 
 Singletons are application-level singletons. While there might be a variety of different stores (such as a `UserStore`, `FeedStore`, `MessageStore` etc.), there won't be multiple instances of the same store. Typically this means exporting an individual store object and globally exposing it to all component's that `require` it.
 
-This is somewhat analogous to our database metaphora: We might store different "kinds" of data that we store in different databases (e.g. we might unstructured data in MongoDB and relational data in something like PostgreSQL), but all clients share the "same" database. Each application node has access to the same data.
+This is somewhat analogous to our database metaphors: We might store different "kinds" of data that we store in different databases (e.g. we might store unstructured data in MongoDB and relational data in something like PostgreSQL), but all clients share the "same" database. Each application node has access to the same data.
 
 On the most fundamental level, a store encapsulates state. We can easily model this using a ES6 class:
 
@@ -50,7 +50,7 @@ Of course having a store that simply wraps our state object isn't too useful yet
 
 Hence we need a way to wire up our components to our global store. In some way, components need to be able to "listen" for state changes that occur in out store:
 
-![Flux Store](./assets/Flux - Store.png)
+![Flux Store](https://s3.amazonaws.com/learn-verified/react-stores-readme-flux-store.png)
 
 An arbitrary number of components can subscribe to state changes that occur in the store. Component's can then react to the  state change by updating their own state and thus triggering a re-render.
 

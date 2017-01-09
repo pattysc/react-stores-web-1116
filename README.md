@@ -198,7 +198,7 @@ class Profile extends React.Component {
 }
 ```
 
-And Voila! Our component is now wired up to our store. There is just one small (but very important!) issue which we didn't address,yet!
+And Voila! Our component is now wired up to our store. There is just one small (but very important!) issue which we didn't address, yet!
 
 What happens when the component is being unmounted? In other words, what happens when the user leaves the profile page and goes somewhere else?
 
@@ -344,3 +344,5 @@ In this lesson we learned a lot about stores, how to connect them to component a
 
 - [React: Flux Overview](https://facebook.github.io/flux/docs/overview.html)
 - [Actions and the Dispatcher](https://facebook.github.io/flux/docs/actions-and-the-dispatcher.html#content)
+
+<p class='util--hide'>View <a href='https://learn.co/lessons/react-stores'>Stores</a> on Learn.co and start learning to code for free.</p>

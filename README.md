@@ -238,7 +238,7 @@ class Profile extends React.Component {
 }
 ```
 
-And that's it! Our `<Profile />` component gets updated whenever we `UserStore` gets updated.
+And that's it! Our `<Profile />` component gets updated whenever our `UserStore` gets updated.
 
 ## Store API
 
@@ -332,13 +332,13 @@ Which would ignore store updates that are unrelated to our actual user record.
 
 2. Better modularity
 
-Potentially, there could be all kinds of components that render user object. E.g. a chat sidebar could display each user using an individual component, a friend component or modal could equally be wired up to the shared store.
+Potentially, there could be all kinds of components that render user objects. E.g. a chat sidebar could display each user using an individual component, a friend component or modal could equally be wired up to the shared store.
 
 Extracting out the logic for finding individual users based on id reduces code redundancy in those cases.
 
 ## Summary
 
-In this lesson we learned a lot about stores, how to connect them to component and how modularize our component architecture. In the next lesson we're going to learn how to update stores using our action handlers.
+In this lesson we learned a lot about stores, how to connect them to components and how to modularize our component architecture. In the next lesson we're going to learn how to update stores using our action handlers.
 
 ## Resources
 
